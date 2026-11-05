@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ECU Doctor — Diagnóstico de Central</title>
+  <link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+  <header class="topbar">
+    <div class="container topbar-inner">
+      <div class="brand">
+        <span class="brand-mark">ECU</span>
+        <span class="brand-name">Doctor</span>
+      </div>
+      <nav class="steps" id="steps">
+        <span class="step" data-step="1">1. Arquivo</span>
+        <span class="step" data-step="2">2. Testes físicos</span>
+        <span class="step" data-step="3">3. Relatório</span>
+      </nav>
+    </div>
+  </header>
+
+  <main class="container">
+    <section class="hero">
+      <h1>Diagnóstico de central eletrônica</h1>
+      <p>Envie o arquivo do scanner, complemente com medições de multímetro e osciloscópio, e receba um relatório com possíveis falhas, testes orientados e próximos passos.</p>
+    </section>
+
+    <section class="card" id="upload-card">
+      <h2><span class="num">1</span> Arquivo de diagnóstico</h2>
+      <div class="dropzone" id="dropzone">
+        <input type="file" id="file-input" accept=".json,.csv,.txt" hidden>
+        <p class="drop-title">Arraste o arquivo aqui ou clique para selecionar</p>
+        <p class="drop-hint">Formatos aceitos: JSON, CSV e texto — até 4 MB</p>
+        <button type="button" class="btn" id="pick-btn">Selecionar arquivo</button>
+      </div>
+      <div class="file-info" id="file-info" hidden>
+        <div class="file-line">
+          <strong id="file-name"></strong>
+          <span class="badge" id="file-format"></span>
+          <button type="button" class="btn-link" id="clear-file">trocar arquivo</button>
+        </div>
+        <div class="file-stats" id="file-stats"></div>
+        <div class="missing" id="missing-box" hidden>
+          <p class="missing-title">Informações ausentes no arquivo — complete na seção abaixo:</p>
+          <ul id="missing-list"></ul>
+        </div>
+      </div>
+      <p class="error" id="upload-error" hidden></p>
+    </section>
+
+    <section class="card" id="manual-card">
+      <h2><span class="num">2</span> Testes físicos manuais</h2>
+      <p class="section-hint">Preencha apenas o que você mediu. Campos vazios são ignorados no relatório. Deixe-os em branco se não tiver o equipamento disponível.</p>
+      <div id="manual-groups"></div>
+      <div class="actions">
+        <button type="button" class="btn btn-primary" id="report-btn" disabled>Gerar relatório</button>
+        <span class="hint" id="manual-count">0 medições preenchidas</span>
+      </div>
+      <p class="error" id="manual-error" hidden></p>
+    </section>
+
+    <section class="card" id="report-card" hidden>
+      <div class="report-head">
+        <h2><span class="num">3</span> Relatório de diagnóstico</h2>
+        <div class="report-actions">
+          <button type="button" class="btn" id="download-btn">Baixar JSON</button>
+          <button type="button" class="btn" id="print-btn">Imprimir / PDF</button>
+          <button type="button" class="btn-link" id="restart-btn">novo diagnóstico</button>
+        </div>
+      </div>
+      <div id="report-content"></div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="container">
+      <p>ECU Doctor — apoio à diagnóstico. Confirme sempre as conclusões com medições antes de trocar componentes.</p>
+    </div>
+  </footer>
+
+  <script src="/app.js"></script>
+</body>
+</html>
